@@ -4,7 +4,7 @@ import NavBar from './NavBar.jsx';
 import Detail from './Detail.jsx';
 import Cart from './Cart.jsx';
 import CartProvider from '../context/CartContext';
-import Home from './Home.jsx';
+import Home from './Home/Home.jsx';
 import Login from './Login.jsx';
 import { useAuth } from '../context/AuthContext';
 
