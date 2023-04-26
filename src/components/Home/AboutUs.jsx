@@ -15,7 +15,7 @@ const AboutUs = () => {
             </p>
           </div>
           <div className="md:w-1/2">
-            <img className="rounded-lg shadow-lg" src="about-us-image.jpg" alt="About Us" />
+            <img className="rounded-lg shadow-lg" src="https://dummyimage.com/600x400/000/fff" alt="About Us" />
           </div>
         </div>
       </div>
