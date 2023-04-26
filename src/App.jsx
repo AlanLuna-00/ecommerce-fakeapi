@@ -1,12 +1,10 @@
 import './App.css';
+import './index.css';
 import Layout from './components/Layout';
-import CartProvider from './context/CartContext';
 
 const App = () => {
   return (
-    <CartProvider>
-      <Layout />
-    </CartProvider>
+    <Layout />
   );
 }
 

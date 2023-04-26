@@ -1,54 +1,51 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Link } from '@mui/material';
 import { useCartContext } from '../context/CartContext.jsx';
-
-
-
-
+import toast, { Toaster } from 'react-hot-toast';
 
 // eslint-disable-next-line react/prop-types
 export default function ImgMediaCard({ title, price, image, description, id, item }) {
-
     const { addToCart } = useCartContext();
 
-    const handleAddToCart = item => {
-        addToCart(item); 
-    }
-    
+    const handleAddToCart = (item) => {
+        addToCart(item);
+    };
+
+
+    const notify = () => toast.success('Item added to cart!', {icon: '💸'});
+
     return (
-        <Card sx={{ width: '100%', height: '100%', position: 'relative' }} >
-            <CardMedia
-                component="img"
-                alt={title}
-                height="300"
-                image={image}
-                title={title}
-                style={{ objectFit: 'contain' }}
-            />
-            <CardContent style={{ marginBottom: '15px' }}>
-                <Typography gutterBottom variant="h5" component="div" height='100%'>
-                    {title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" >
-                    {description}
-                </Typography>
-                <Typography variant="subtitle1" color="text.secondary">
-                    ${price}
-                </Typography>
-            </CardContent>
-            <CardActions style={{ position: 'absolute', bottom: '5px' }}>
-                <Link href={`/productos/${id}`} underline="none">
-                    <Button size="small">Details</Button>
-                </Link>
-                <Button size="small" onClick={() => handleAddToCart(item)}>
+        <div className="w-full rounded-lg overflow-hidden shadow-md bg-white flex flex-col">
+            <img className="w-full h-56 object-contain object-center" src={image} alt={title} />
+            <div className="p-4">
+                <h5 className="text-lg font-bold mb-2">{title}</h5>
+                <p className="text-sm text-gray-600 mb-2">{description}</p>
+                <p className="text-sm font-bold">${price}</p>
+            </div>
+            <div className="p-4 bg-gray-50 flex justify-between items-center mt-auto">
+                <button className='text-sm font-bold bg-gray-700 hover:bg-gray-900 text-white px-4 py-3 rounded-lg'>
+                    <a href={`/productos/${id}`} className="text-sm">
+                        Details
+                    </a>
+                </button>
+                <button
+                    className="text-sm font-bold bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-3 rounded-lg"
+                    onClick={() => {
+                        handleAddToCart(item);
+                        notify();
+                    }}
+                >
                     Add to Cart
-                </Button>
-            </CardActions>
-        </Card>
+                </button>
+            </div>
+            <Toaster
+                position='top-left' toastOptions={{
+                    duration: 3000,
+                    style: {
+                        background: '#fff',
+                        color: '#000',
+                        fontSize: '1.1rem',
+                    },
+                }}
+            />
+        </div>
     );
 }

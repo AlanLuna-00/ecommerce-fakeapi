@@ -1,50 +1,47 @@
-import Card from './Card.jsx'
-import Grid from '@mui/material/Grid';
+import { useState, useEffect } from 'react';
+import Card from './Card.jsx';
 import { useFetchItems } from '../hooks/useFetchItems.js';
-import { CircularProgress } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-
-const useStyles = makeStyles(() => ({
-    spinner: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  }));
+import Filters from './Filters.jsx';
+import '../App.css';
 
 const Cards = () => {
+  const { items, loading, error } = useFetchItems();
+  const [showSpinner, setShowSpinner] = useState(true);
 
-    const classes = useStyles();
-    const { items, loading, error } = useFetchItems();
+  useEffect(() => {
+    let timer;
+    if (loading) {
+      timer = setTimeout(() => setShowSpinner(true), 500);
+    } else {
+      setShowSpinner(false);
+    }
+    return () => clearTimeout(timer);
+  }, [loading]);
 
-    
+  return (
+    <div className="cards-container">
+      <h1 className="cards-title">Products</h1>
+      <Filters />
+      {showSpinner && <div className="cards-spinner" />}
+      {error ? (
+        <h1>{error}</h1>
+      ) : (
+        <div className="grid  sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-4 ">
+          {items.map((item) => (
+            <Card
+              key={item.id}
+              title={item.title}
+              price={item.price}
+              image={item.image}
+              description={item.description}
+              id={item.id}
+              item={item}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
-    return (
-        <>
-            <h1 style={{ margin: '0 0 30px 0' }}>Products</h1>
-            <Grid container spacing={12}>
-                {loading ?
-                    <div className={classes.spinner}>
-                        <CircularProgress />
-                    </div>
-                    : error ? <h1>{error}</h1>
-                        : items.map((item) => (
-                            <Grid item xs={12} dm={8} lg={4} key={item.id}>
-                                <Card
-                                    title={item.title}
-                                    price={item.price}
-                                    image={item.image}
-                                    description={item.description}
-                                    id={item.id}
-                                    item={item}
-                                />
-                            </Grid>
-                        ))}
-            </Grid>
-        </>
-    )
-}
-
-export default Cards
+export default Cards;

@@ -7,7 +7,7 @@ export const CLEAN_DETAIL = 'CLEAN_DETAIL';
 
 export const filterCards = (category) => ({ type: FILTER_CARDS, payload: category });
 
-export const orderByPrice = () => ({ type: ORDER_BY_PRICE });
+export const orderByPrice = (value) => ({ type: ORDER_BY_PRICE, payload: value });
 
 export const fetchProductsRequest = () => {
     return function (dispatch) {

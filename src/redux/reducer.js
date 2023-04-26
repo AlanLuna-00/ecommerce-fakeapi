@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { FILTER_CARDS, ORDER_BY_PRICE, FETCH_PRODUCTS_REQUEST, FETCH_PRODUCT_DETAIL_REQUEST, CLEAN_DETAIL } from "./actions";
 
 const initialState = {
@@ -12,24 +13,33 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case FILTER_CARDS:
-            // eslint-disable-next-line no-case-declarations
             const cardsCopy = [...state.cardsForFilter];
-            // eslint-disable-next-line no-case-declarations
             const filteredCards = cardsCopy.filter((card) => card.category === action.payload);
             return {
                 ...state,
-                cards: 
+                cards:
                     action.payload === 'all' ? state.cardsForFilter : filteredCards,
             };
         case ORDER_BY_PRICE:
+            let sortedCards = [...state.cards]
+                sortedCards.sort((a, b) => {
+                if (action.payload === 'low') {
+                    return a.price - b.price;
+                } else if (action.payload === 'high') {
+                    return b.price - a.price;
+                } else {
+                    return null;
+                }
+            });
             return {
                 ...state,
-                cards: state.cards.sort((a, b) => a.price - b.price),
+                cards: sortedCards,
             };
+
         case FETCH_PRODUCTS_REQUEST:
             return {
                 ...state,
-                cards : action.payload,
+                cards: action.payload,
                 cardsForFilter: action.payload,
                 loading: false,
             };
