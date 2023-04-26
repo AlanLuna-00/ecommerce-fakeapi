@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-
+import Link from 'react-router-dom'
 
 
 const NavBar = () => {
@@ -18,15 +18,15 @@ const NavBar = () => {
                     </div>
                     <div className="hidden md:block">
                         <div className="flex items-center">
-                            <a href="/home" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            <Link to="/home" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Home
-                            </a>
-                            <a href="/productos" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            </Link>
+                            <Link to="/productos" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Products
-                            </a>
-                            <a href="/carrito" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            </Link>
+                            <Link to="/carrito" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 <i className="fas fa-shopping-cart" style={{ color: 'white', fontSize: '24px' }}></i>
-                            </a>
+                            </Link>
                             <button className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={signOutWithGoogle}>
                                 <i className="fas fa-sign-out-alt" style={{ color: 'white', fontSize: '24px' }}></i>
                             </button>
