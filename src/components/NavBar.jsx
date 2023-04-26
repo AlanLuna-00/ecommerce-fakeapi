@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+
+
 
 const NavBar = () => {
     const [showMenu, setShowMenu] = useState(false);
+    const { user, signOutWithGoogle } = useAuth();
 
     return (
         <nav className="bg-gray-800">
@@ -9,20 +13,23 @@ const NavBar = () => {
                 <div className="flex items-center justify-between h-16">
                     <div className="flex-shrink-0">
                         <a href="/" className="text-white font-bold">
-                            Mi Tienda
+                            The shop of {user.displayName || 'Anonymus'}
                         </a>
                     </div>
                     <div className="hidden md:block">
                         <div className="flex items-center">
-                            <a href="/" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            <a href="/home" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Home
                             </a>
                             <a href="/productos" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                Productos
+                                Products
                             </a>
                             <a href="/carrito" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 <i className="fas fa-shopping-cart" style={{ color: 'white', fontSize: '24px' }}></i>
                             </a>
+                            <button className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={signOutWithGoogle}>
+                                <i className="fas fa-sign-out-alt" style={{ color: 'white', fontSize: '24px' }}></i>
+                            </button>
                         </div>
                     </div>
                     <div className="md:hidden flex items-center">
@@ -52,11 +59,14 @@ const NavBar = () => {
                                 Inicio
                             </a>
                             <a href="/productos" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                                Productos
+                                Products
                             </a>
-                            <a  href="/carrito" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                            <a href="/carrito" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                                 <i className="fas fa-shopping-cart" style={{ color: 'white', fontSize: '24px' }}></i>
                             </a>
+                            <button className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={signOutWithGoogle}>
+                                <i className="fas fa-sign-out-alt" style={{ color: 'white', fontSize: '24px' }}></i>
+                            </button>
                         </div>
                     </div>
                 )}

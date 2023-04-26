@@ -14,7 +14,9 @@ const Detail = () => {
     const { addToCart } = useCartContext();
 
     const handleAddToCart = () => {
-        addToCart({ ...cardDetail, quantity });
+        const itemToAdd = { ...cardDetail, quantity };
+        itemToAdd.price *= quantity;
+        addToCart(itemToAdd);
         notify(quantity);
     }
 
@@ -53,13 +55,16 @@ const Detail = () => {
                         >
                             Add to Cart
                         </button>
-                        <button className="text-sm font-bold bg-red-700 hover:bg-red-900 text-white px-4 py-3 rounded-lg ml-3">
-                            <a href="/productos">Go Back</a>
-                        </button>
-                        <button className="text-sm font-bold bg-red-700 hover:bg-red-900 text-white px-4 py-3 rounded-lg ml-3">
-                            <a href="/carrito">Go To <i className="fas fa-shopping-cart" style={{ color: 'white', fontSize: '16px' }}></i></a>
-                        </button>
-
+                        <a href="/productos">
+                            <button className="text-sm font-bold bg-red-700 hover:bg-red-900 text-white px-4 py-3 rounded-lg ml-3">
+                                Go Back <i className="fas fa-arrow-left" style={{ color: 'white', fontSize: '16px' }}></i>
+                            </button>
+                        </a>
+                        <a href="/carrito">
+                            <button className="text-sm font-bold bg-red-700 hover:bg-red-900 text-white px-4 py-3 rounded-lg ml-3">
+                                Go To <i className="fas fa-shopping-cart" style={{ color: 'white', fontSize: '16px' }}></i>
+                            </button>
+                        </a>
                     </div>
                 </div>
             )}

@@ -33,7 +33,7 @@ const Cart = () => {
                                 <div>
                                     <h3 className="text-lg font-semibold">{item.name}</h3>
                                     <p className="text-sm">Price: ${item.price}</p>
-                                    <p className="text-sm">Quantity: {item.quantity || 1}</p>
+                                    <p className="text-sm">Quantity: {item.quantity}</p>
                                 </div>
                                 <button className="bg-red-500 text-white py-1 px-4 rounded" onClick={() => {
                                     handleRemoveFromCart(index);

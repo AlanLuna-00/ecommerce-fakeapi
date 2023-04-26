@@ -1,11 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
 import { createContext, useState, useContext, useEffect } from 'react';
 
 const CartContext = createContext();
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useCartContext = () => useContext(CartContext);
 
-// eslint-disable-next-line react/prop-types
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = localStorage.getItem('cartItems');
@@ -17,57 +17,69 @@ const CartProvider = ({ children }) => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (product) => {
+  const addToCart = (product, quantity = 1) => {
     const itemIndex = cartItems.findIndex((item) => item.id === product.id);
     if (itemIndex === -1) {
-      // El producto no está en el carrito, así que lo agregamos con cantidad 1
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      // El producto no está en el carrito, así que lo agregamos con la cantidad dada
+      setCartItems([...cartItems, { ...product, quantity }]);
     } else {
-      // El producto ya está en el carrito, así que incrementamos su cantidad
-      const updatedCartItems = [...cartItems];
-      updatedCartItems[itemIndex].quantity += 1;
-      setCartItems(updatedCartItems);
+      // El producto ya está en el carrito, así que aumentamos la cantidad
+      const newCartItems = [...cartItems];
+      newCartItems[itemIndex].quantity += quantity;
+      setCartItems(newCartItems);
     }
   };
 
 
-  const showCart = () => {
-    return cartItems;
-  };
 
-  const removeFromCart = (index) => {
-    const newCartItems = [...cartItems];
-    newCartItems.splice(index, 1);
-    setCartItems(newCartItems);
-  };
 
-  const clearCart = () => {
-    setCartItems([]);
-  };
+const updateCart = (product, newQuantity) => {
+  const itemIndex = cartItems.findIndex((item) => item.id === product.id);
+  if (itemIndex !== -1) {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[itemIndex].quantity = newQuantity;
+    setCartItems(updatedCartItems);
+  }
+};
 
-  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+const showCart = () => {
+  return cartItems;
+};
 
-  useEffect(() => {
-    const newTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    newTotal.toFixed(2);
-    setCartTotal(newTotal);
-  }, [cartItems]);
+const removeFromCart = (index) => {
+  const newCartItems = [...cartItems];
+  newCartItems.splice(index, 1);
+  setCartItems(newCartItems);
+};
 
-  return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        removeFromCart,
-        clearCart,
-        cartCount,
-        cartTotal,
-        showCart,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
+const clearCart = () => {
+  setCartItems([]);
+};
+
+const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+useEffect(() => {
+  const newTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  newTotal.toFixed(2);
+  setCartTotal(newTotal);
+}, [cartItems]);
+
+return (
+  <CartContext.Provider
+    value={{
+      cartItems,
+      addToCart,
+      updateCart,
+      removeFromCart,
+      clearCart,
+      cartCount,
+      cartTotal,
+      showCart,
+    }}
+  >
+    {children}
+  </CartContext.Provider>
+);
 };
 
 export default CartProvider;

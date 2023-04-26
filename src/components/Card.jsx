@@ -10,7 +10,7 @@ export default function ImgMediaCard({ title, price, image, description, id, ite
     };
 
 
-    const notify = () => toast.success('Item added to cart!', {icon: '💸'});
+    const notify = () => toast.success('Item added to cart!', { icon: '💸' });
 
     return (
         <div className="w-full rounded-lg overflow-hidden shadow-md bg-white flex flex-col">
@@ -21,11 +21,11 @@ export default function ImgMediaCard({ title, price, image, description, id, ite
                 <p className="text-sm font-bold">${price}</p>
             </div>
             <div className="p-4 bg-gray-50 flex justify-between items-center mt-auto">
-                <button className='text-sm font-bold bg-gray-700 hover:bg-gray-900 text-white px-4 py-3 rounded-lg'>
-                    <a href={`/productos/${id}`} className="text-sm">
+                <a href={`/productos/${id}`} className="text-sm">
+                    <button className='text-sm font-bold bg-gray-700 hover:bg-gray-900 text-white px-4 py-3 rounded-lg'>
                         Details
-                    </a>
-                </button>
+                    </button>
+                </a>
                 <button
                     className="text-sm font-bold bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-3 rounded-lg"
                     onClick={() => {
