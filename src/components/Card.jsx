@@ -1,5 +1,7 @@
 import { useCartContext } from '../context/CartContext.jsx';
 import toast, { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
+
 
 // eslint-disable-next-line react/prop-types
 export default function ImgMediaCard({ title, price, image, description, id, item }) {
@@ -23,11 +25,11 @@ export default function ImgMediaCard({ title, price, image, description, id, ite
                     <p className="text-sm font-bold">${price}</p>
                 </div>
                 <div className="p-4 bg-gray-50 flex justify-between items-center mt-auto">
-                    <a href={`/products/${id}`} className="text-sm">
+                    <Link to={`/products/${id}`} className="text-sm">
                         <button className='text-sm font-bold bg-gray-700 hover:bg-gray-900 text-white px-4 py-3 rounded-lg'>
                             Details
                         </button>
-                    </a>
+                    </Link>
                     <button
                         className="text-sm font-bold bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-3 rounded-lg"
                         onClick={() => {
