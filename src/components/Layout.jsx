@@ -28,13 +28,13 @@ const Layout = () => {
             <Route path="/home" element={<RequireAuth>
               <Home />
             </RequireAuth>} />
-            <Route path="/productos" element={<RequireAuth>
+            <Route path="/products" element={<RequireAuth>
               <Cards />
             </RequireAuth>} />
-            <Route path="/productos/:id" element={<RequireAuth>
+            <Route path="/products/:id" element={<RequireAuth>
               <Detail />
             </RequireAuth>} />
-            <Route path="/carrito" element={<RequireAuth>
+            <Route path="/cart" element={<RequireAuth>
               <Cart />
             </RequireAuth>} />
             <Route element={<Navigate to="/" />} />

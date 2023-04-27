@@ -1,11 +1,46 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast';
 
 
 const NavBar = () => {
     const [showMenu, setShowMenu] = useState(false);
     const { user, signOutWithGoogle } = useAuth();
+
+    const handleConfirmSignOut = () => {
+        signOutWithGoogle();
+        toast.dismiss();
+    };
+
+
+    const handleSignOut = () => {
+        toast.custom(
+            <div className='bg-white p-5 rounded-xl shadow-md'>
+                <p>¿Estás seguro de que deseas cerrar sesión?</p>
+                <div className="mt-4 flex justify-evenly " >
+                    <button
+                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mr-2"
+                        onClick={() => handleConfirmSignOut()}
+                    >
+                        Confirmar
+                    </button>
+                    <button
+                        className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => toast.dismiss()}
+                    >
+                        Cancelar
+                    </button>
+                </div>
+            </div>,
+            {
+                duration: Infinity,
+                position: 'top-center',
+            }
+        );
+    };
+
+
 
     return (
         <nav className="bg-gray-800">
@@ -21,13 +56,13 @@ const NavBar = () => {
                             <Link to="/home" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Home
                             </Link>
-                            <Link to="/productos" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            <Link to="/products" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Products
                             </Link>
-                            <Link to="/carrito" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                            <Link to="/cart" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 <i className="fas fa-shopping-cart" style={{ color: 'white', fontSize: '24px' }}></i>
                             </Link>
-                            <button className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={signOutWithGoogle}>
+                            <button className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={handleSignOut}>
                                 <i className="fas fa-sign-out-alt" style={{ color: 'white', fontSize: '24px' }}></i>
                             </button>
                         </div>
@@ -56,15 +91,15 @@ const NavBar = () => {
                     <div className="md:hidden" id="mobile-menu">
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             <Link to="/" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                                Inicio
+                                Home
                             </Link>
-                            <Link to="/productos" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                            <Link to="/products" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                                 Products
                             </Link>
-                            <Link to="/carrito" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                            <Link to="/cart" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
                                 <i className="fas fa-shopping-cart" style={{ color: 'white', fontSize: '24px' }}></i>
                             </Link>
-                            <button className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={signOutWithGoogle}>
+                            <button className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" onClick={handleSignOut}>
                                 <i className="fas fa-sign-out-alt" style={{ color: 'white', fontSize: '24px' }}></i>
                             </button>
                         </div>
