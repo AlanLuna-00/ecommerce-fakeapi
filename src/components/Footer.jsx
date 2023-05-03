@@ -27,7 +27,7 @@ const Footer = () => {
         <footer className={`bg-gray-900 text-white py-4 ${showFooter ? 'visible' : 'invisible'}`}>
             <div className="container mx-auto px-4 flex justify-between items-center">
                 <p className="text-sm">
-                    Alan Luna 👨🏽‍💻 &copy; {new Date().getFullYear()} Todos los derechos reservados
+                    Alan Luna 👨🏽‍💻 &copy; {new Date().getFullYear()} Todos los derechos reservados.
                 </p>
                 <div className="flex space-x-4">
                     <Link
