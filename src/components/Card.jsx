@@ -1,14 +1,22 @@
 import { useCartContext } from '../context/CartContext.jsx';
 import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import {  useDispatch } from 'react-redux';
+import { cleanDetail } from '../redux/actions.js';
 
 
 // eslint-disable-next-line react/prop-types
 export default function ImgMediaCard({ title, price, image, description, id, item }) {
     const { addToCart } = useCartContext();
 
+    const dispatch = useDispatch()
+    
+    const handleDetail = () => {
+        dispatch(cleanDetail())
+    }
+
     const handleAddToCart = (item) => {
-        addToCart(item);
+        addToCart(item, 1);
     };
 
 
@@ -26,14 +34,14 @@ export default function ImgMediaCard({ title, price, image, description, id, ite
                 </div>
                 <div className="p-4 bg-gray-50 flex justify-between items-center mt-auto">
                     <Link to={`/products/${id}`} className="text-sm">
-                        <button className='text-sm font-bold bg-gray-700 hover:bg-gray-900 text-white px-4 py-3 rounded-lg'>
-                            Details
+                        <button className='text-sm font-bold bg-gray-700 hover:bg-gray-900 text-white px-4 py-3 rounded-lg' onClick={handleDetail}>
+                            Detail
                         </button>
                     </Link>
                     <button
                         className="text-sm font-bold bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-3 rounded-lg"
                         onClick={() => {
-                            handleAddToCart(item);
+                            handleAddToCart(item, 1);
                             notify();
                         }}
                     >
