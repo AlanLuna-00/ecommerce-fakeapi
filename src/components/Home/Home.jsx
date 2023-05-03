@@ -1,4 +1,5 @@
 import AboutUs from "./AboutUs";
+import FAQs from "./Faqs";
 import Slide from "./Slide";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
         <>
             <Slide />
             <AboutUs />
+            <FAQs />
         </>
     );
 }

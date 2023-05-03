@@ -6,6 +6,7 @@ import Cart from './Cart.jsx';
 import CartProvider from '../context/CartContext';
 import Home from './Home/Home.jsx';
 import Login from './Login.jsx';
+import Footer from './Footer.jsx';
 import { useAuth } from '../context/AuthContext';
 
 
@@ -38,6 +39,7 @@ const Layout = () => {
             <Route element={<Navigate to="/" />} />
           </Routes>
         </div>
+        {user && <Footer />}
       </CartProvider>
     </Router>
   );
