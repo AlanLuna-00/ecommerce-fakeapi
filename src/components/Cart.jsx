@@ -72,6 +72,8 @@ const Cart = () => {
                                                 <button
                                                     className="bg-red-500 text-white px-2 rounded "
                                                     onClick={() => handleDecreaseQuantity(index)}
+                                                    {...(item.quantity === 1 && { disabled: true })}
+                                                    {...(item.quantity === 1 && { className: 'bg-gray-500 text-white px-2 rounded' })}
                                                 >
                                                     -
                                                 </button>
