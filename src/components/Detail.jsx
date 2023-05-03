@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useFetchDetail } from '../hooks/useFetchDetail';
 import { useCartContext } from '../context/CartContext';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -75,16 +75,6 @@ const Detail = () => {
                     </div>
                 )
             )}
-            <Toaster
-                position='top-left' toastOptions={{
-                    duration: 3000,
-                    style: {
-                        background: '#fff',
-                        color: '#000',
-                        fontSize: '1.1rem',
-                    },
-                }}
-            />
         </div>
 
     );

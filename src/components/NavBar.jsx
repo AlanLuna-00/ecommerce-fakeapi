@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 
 const NavBar = () => {
@@ -85,7 +85,6 @@ const NavBar = () => {
                                 </svg>
                             )}
                         </button>
-                        <Toaster />
                     </div>
                 </div>
                 {showMenu && (
@@ -104,7 +103,6 @@ const NavBar = () => {
                                 <i className="fas fa-sign-out-alt" style={{ color: 'white', fontSize: '24px' }}></i>
                             </button>
                         </div>
-                <Toaster />
                     </div>
                 )}
             </div>

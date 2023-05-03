@@ -8,7 +8,7 @@ import Home from './Home/Home.jsx';
 import Login from './Login.jsx';
 import Footer from './Footer.jsx';
 import { useAuth } from '../context/AuthContext';
-
+import { Toaster } from 'react-hot-toast';
 
 const Layout = () => {
   const { user } = useAuth();
@@ -41,6 +41,7 @@ const Layout = () => {
         </div>
         {user && <Footer />}
       </CartProvider>
+      <Toaster />
     </Router>
   );
 };

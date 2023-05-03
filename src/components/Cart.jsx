@@ -1,6 +1,6 @@
 import { useCartContext } from '../context/CartContext';
 import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import useSendEmail from '../hooks/useSendEmail';
 import { useAuth } from '../context/AuthContext';
 
@@ -139,7 +139,6 @@ const Cart = () => {
                 </>
             )}
 
-            <Toaster />
         </div>
     );
 };

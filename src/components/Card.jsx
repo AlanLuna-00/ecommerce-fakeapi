@@ -1,7 +1,7 @@
 import { useCartContext } from '../context/CartContext.jsx';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { cleanDetail } from '../redux/actions.js';
 
 
@@ -10,7 +10,7 @@ export default function ImgMediaCard({ title, price, image, description, id, ite
     const { addToCart } = useCartContext();
 
     const dispatch = useDispatch()
-    
+
     const handleDetail = () => {
         dispatch(cleanDetail())
     }
@@ -28,7 +28,7 @@ export default function ImgMediaCard({ title, price, image, description, id, ite
                 <img className="w-full h-56 object-contain object-center" src={image} alt={title} />
                 <div className="p-4">
                     <h5 className="text-lg font-bold mb-2">{title}</h5>
-                    <hr style={{position: 'relative', bottom:6}}/>
+                    <hr style={{ position: 'relative', bottom: 6 }} />
                     <p className="text-sm text-gray-600 mb-2">{description}</p>
                     <p className="text-sm font-bold">${price}</p>
                 </div>
@@ -49,16 +49,6 @@ export default function ImgMediaCard({ title, price, image, description, id, ite
                     </button>
                 </div>
             </div>
-            <Toaster
-                position='top-left' toastOptions={{
-                    duration: 3000,
-                    style: {
-                        background: '#fff',
-                        color: '#000',
-                        fontSize: '1.1rem',
-                    },
-                }}
-            />
         </>
     );
 }
