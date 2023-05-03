@@ -52,6 +52,7 @@ const Login = () => {
                     <FaUserSecret className="mr-2" />
                     Login Anonymously
                 </button>
+                <span>Si te logueas como anonimo, no podras hacer la compra</span>
             </div>
         </div>
     )

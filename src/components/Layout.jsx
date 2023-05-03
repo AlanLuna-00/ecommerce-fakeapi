@@ -7,7 +7,6 @@ import CartProvider from '../context/CartContext';
 import Home from './Home/Home.jsx';
 import Login from './Login.jsx';
 import { useAuth } from '../context/AuthContext';
-import PageNotFound from './404.jsx';
 
 
 const Layout = () => {
@@ -23,7 +22,6 @@ const Layout = () => {
         {user && <NavBar />}
         <div className="container mx-auto">
           <Routes>
-            <Route path="/404" element={<PageNotFound />} />
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<RequireAuth>
               <Home />

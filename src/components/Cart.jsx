@@ -95,16 +95,22 @@ const Cart = () => {
                         <h3 className="text-lg font-semibold">Total:</h3>
                         <h3 className="text-lg font-bold">${cartTotal.toFixed(2)}</h3>
                     </div>
-                    <button
-                        className={`${isCartEmpty ? 'cursor-not-allowed' : 'bg-green-500'
-                            } text-white py-2 px-4 rounded mt-4`}
-                        disabled={isCartEmpty}
-                        onClick={() => {
-                            handlePurchase();
-                        }}
-                    >
-                        Buy Now
-                    </button>
+                    {user.email === null ? (
+                        <p className="text-lg text-center mt-4">
+                            Necesitas estar logueado con google para comprar
+                        </p>
+                    ) : (
+                        <>
+                            <button
+                                className={`${isCartEmpty ? 'cursor-not-allowed' : 'bg-green-500'
+                                    } text-white py-2 px-4 rounded mt-4`}
+                                disabled={isCartEmpty}
+                                onClick={handlePurchase}
+                            >
+                                Buy Now
+                            </button>
+                        </>
+                    )}
                 </>
             )}
             <button
@@ -115,6 +121,23 @@ const Cart = () => {
             >
                 Clear Cart
             </button>
+            {user.email === null ? (
+                null
+            ) : (
+                <>
+                    <p
+                        className={`text-sm text-center mt-4 text-gray-500 ${isCartEmpty ? 'opacity-0' : 'opacity-100'
+                            } transition-opacity duration-300`}
+                    >
+                        <span style={{ color: 'red' }}>*</span> Esta es una aplicación de demostración, no se procesará ningún pago.                    </p>
+                    <p
+                        className={`text-sm text-center mt-4 text-gray-500 ${isCartEmpty ? 'opacity-0' : 'opacity-100'
+                            } transition-opacity duration-300`}
+                    >
+                        <span style={{ color: 'red' }}>*</span> El correo electrónico se enviará a {user.email}, quizás deberias revisar tu carpeta de correo no deseado.
+                    </p>
+                </>
+            )}
 
             <Toaster />
         </div>
