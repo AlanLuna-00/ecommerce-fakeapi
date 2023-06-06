@@ -16,44 +16,7 @@ const useEmailSender = () => {
       .join("\n");
     const total = `Total: $${cartTotal.toFixed(2)}`;
 
-    const message = `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <style>
-              table {
-                border-collapse: collapse;
-                width: 100%;
-              }
-              
-              th, td {
-                text-align: left;
-                padding: 8px;
-                border-bottom: 1px solid #ddd;
-              }
-              
-              th {
-                background-color: #f2f2f2;
-              }
-            </style>
-          </head>
-          <body>
-            <h2>Your order has been placed successfully!</h2>
-            
-            <table>
-              <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Price</th>
-              </tr>
-              ${items}
-            </table>
-            
-            <p>Total: ${total}</p>
-          </body>
-        </html>
-        `;
-
+    const message = `Your order has been placed successfully!\n\nItem\t\t\tQuantity\t\tPrice\n----------------------------------------\n${items}\n\n${total}`;
     const templateParams = {
       from_name: "E-commerce",
       to_email: user.email,
